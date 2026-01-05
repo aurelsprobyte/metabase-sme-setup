@@ -1,0 +1,47 @@
+#### `docker-compose.yml`
+
+services:
+  metabase_db:
+    image: postgres:16-alpine
+    container_name: metabase_db
+    environment:
+      POSTGRES_DB: ${MB_DB_DBNAME}
+      POSTGRES_USER: ${MB_DB_USER}
+      POSTGRES_PASSWORD: ${MB_DB_PASS}
+    volumes:
+      - metabase_db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  metabase:
+    image: metabase/metabase:latest
+    container_name: metabase
+    depends_on:
+      - metabase_db
+    ports:
+      - "3000:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_HOST: metabase_db
+      MB_DB_PORT: 5432
+      MB_DB_DBNAME: ${MB_DB_DBNAME}
+      MB_DB_USER: ${MB_DB_USER}
+      MB_DB_PASS: ${MB_DB_PASS}
+    restart: unless-stopped
+
+  # Voliteľné: demo databáza, aby sa dalo Metabase hneď vyskúšať.
+  demo_data_db:
+    image: postgres:16-alpine
+    container_name: demo_data_db
+    environment:
+      POSTGRES_DB: ${DEMO_DB_NAME}
+      POSTGRES_USER: ${DEMO_DB_USER}
+      POSTGRES_PASSWORD: ${DEMO_DB_PASS}
+    volumes:
+      - demo_data_db_data:/var/lib/postgresql/data
+      - ./demo/init:/docker-entrypoint-initdb.d:ro
+    restart: unless-stopped
+
+volumes:
+  metabase_db_data:
+  demo_data_db_data:
+
