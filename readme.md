@@ -1,7 +1,8 @@
 # 📈 Metabase SME Setup (practical starter)
 
 Tento repozitár je praktický „starter“ pre nasadenie Metabase v malej alebo strednej firme.
-Cieľ: rýchlo získať prehľadné dashboardy nad dátami bez zbytočnej zložitosti.
+
+**Cieľ: rýchlo získať prehľadné dashboardy nad dátami bez zbytočnej zložitosti.**
 
 Nie je to hotový produkt ani univerzálny návod. Je to základ, z ktorého sa dá rozumne vychádzať.
 
@@ -34,7 +35,7 @@ Nie je to hotový produkt ani univerzálny návod. Je to základ, z ktorého sa 
 
 1. Naklonuj repozitár:
    ```bash
-   git clone <URL_TO_YOUR_REPO>
+   git clone https://github.com/aurelsprobyte/metabase-sme-setup.git
    cd metabase-sme-setup
    ```
 2. Skopíruj a uprav environment premenné:
@@ -42,9 +43,9 @@ Nie je to hotový produkt ani univerzálny návod. Je to základ, z ktorého sa 
     cp .env.example .env
     ```
 3. Spusť stack:
-  ```bash
-  docker compose up -d
-  ```
+    ```bash
+    docker compose up -d
+    ```
 4. Otvor Metabase v prehliadači:
 http://localhost:3000.
 
@@ -91,18 +92,18 @@ Tieto dáta sú navrhnuté tak, aby bolo možné:
 - demonštrovať prácu s dátami bez citlivých informácií
 
 **Pripojenie databázy**
-Pripojenie v Metabase (Admin → Databases → Add database):
-Typ databázy: PostgreSQL
-Zobraziť meno: Demo DB
-Hostiteľ: demo_data_db
-port: 5432
-Meno databázy: demo
-Používateľské meno: demo
-Heslo: z .env
 
-Ulož databázu a počkaj na inicializáciu schémy
-Po dokončení sa demo dáta zobrazia v:
-Browse data
+Pripojenie v Metabase (Admin → Databases → Add database):
+
+- Typ databázy: PostgreSQL
+- Zobraziť meno: Demo DB
+- Hostiteľ: demo_data_db
+- Port: 5432
+- Meno databázy: demo
+- Používateľské meno: demo
+- Heslo: z .env
+
+Ulož databázu a počkaj na inicializáciu schémy. 
 
 
 **Poznámka**
@@ -115,32 +116,24 @@ Metabase do databáz nikdy nezapisuje, používa ich výhradne na čítanie a an
 
 ## 🛡️ Bezpečnostné minimum (odporúčané)
 
-NIKDY nezverejňuj Metabase do internetu bez HTTPS a autentifikácie
-
-používaj role a prístupy (skupiny, permissions)
-
-oddel účty pre čítanie dát (read-only) od účtov s právami na zmenu
-
-používaj silné heslá a unikátne tajomstvá v .env (necommitovať)
-
-produkčne rieš zálohy (aspoň metabase_db) a aktualizácie
+- NIKDY nezverejňuj Metabase do internetu bez HTTPS a autentifikácie
+- používaj role a prístupy (skupiny, permissions)
+- rozdeľ účty pre čítanie dát (read-only) od účtov s právami na zmenu
+- používaj silné heslá aj v .env (.env necommitovať)
+- produkčne rieš zálohy (aspoň metabase_db) a aktualizácie
 
 
 ## ⛔ Čo to NIE je
 
-nie je to kompletné BI riešenie
-
-nie je to referenčná architektúra pre enterprise
-
-neobsahuje reálne integračné konektory na účtovné/ERP systémy (tie sú vždy špecifické)
+- nie je to kompletné BI riešenie
+- nie je to referenčná architektúra pre enterprise
+- neobsahuje reálne integračné konektory na účtovné/ERP systémy (tie sú vždy špecifické)
 
 ## 🧭 Roadmap / nápady na pokračovanie
 
-konkrétny príklad: napojenie dát z účtovného systému POHODA
-
-príklady dashboardov (cashflow, náklady vs. výnosy, KPI)
-
-hardening, prístupy a bezpečnostné pravidlá pre produkciu
+- konkrétny príklad: napojenie dát z účtovného systému POHODA
+- príklady dashboardov (cashflow, náklady vs. výnosy, KPI)
+- hardening, prístupy a bezpečnostné pravidlá pre produkciu
 
 ## ⚖️ Disclaimer
 
